@@ -4,10 +4,12 @@ LIBFT = libs/libft/libft.a
 
 LIBFT_PATH = "libs/libft/"
 
-SRCS = src/main.c src/init.c src/start_game.c \
-		src/movement.c src/raycasting.c src/utils.c \
-		src/player.c
-
+SRCS = src/main.c src/movement.c \
+		src/rendering.c \
+		src/raycasting.c \
+		src/start_game.c \
+		# src/init.c 
+# src/utils.c
 RM = rm -f
 
 INCS	= -I ./includes/
