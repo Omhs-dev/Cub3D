@@ -72,11 +72,11 @@ t_map *init_argument()	// init the data structure
 	return (dt); // return the data structure
 }
 
-int main()	// main function
+int main(int argc, char **argv)	// main function
 {
 	t_map	*data;
 
-	data = init_argument();
+	data = parse(argc, argv);
 	start_the_game(data);
 	return (0);
 }

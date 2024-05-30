@@ -4,10 +4,18 @@ LIBFT = libs/libft/libft.a
 
 LIBFT_PATH = "libs/libft/"
 
-SRCS = src/main.c src/movement.c \
-		src/rendering.c \
-		src/raycasting.c \
-		src/start_game.c \
+SRCS =  ./src/main.c \
+		./src/movement.c \
+		./src/rendering.c \
+		./src/raycasting.c \
+		./src/utils/errors.c \
+		./src/utils/free.c \
+		./src/start_game.c \
+		./src/parsing/parse_description.c \
+		./src/parsing/parse_map.c \
+		./src/parsing/parser.c \
+		./src/parsing/valid_utils.c \
+		./src/parsing/validate_descr.c \
 		# src/init.c 
 # src/utils.c
 RM = rm -f

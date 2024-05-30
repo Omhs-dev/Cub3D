@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 03:36:39 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/05/28 19:48:29 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/05/30 05:32:26 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
+# include <stdio.h>
+# include <string.h>
+# include <fcntl.h>
+# include <errno.h>
 // include the mlx library
 
 # define S_W 1900 // screen width
@@ -25,6 +29,25 @@
 # define FOV 60 // field of view
 # define ROTATION_SPEED 0.090 // rotation speed
 # define PLAYER_SPEED 8	// player speed
+
+///////////////////////parsing////////////////////
+# define PLAYER_WID 64
+# define PLAYER_HEI 64
+# define PLAYER_STEP 32
+
+// ERROR CODES
+# define WRONG_ARGS_NUM 1
+# define NAME_LENGTH 2
+# define WRONG_EXTENSION 3
+# define FILE_OPEN 4
+# define MAP_DESCRIPTION 5
+# define INVALID_MAP 6
+
+// Drections
+# define NORTH				0
+# define SOUTH				1
+# define EAST				2
+# define WEST				3
 
 # include "cub3d.h"
 #include "../MLX42/include/MLX42/MLX42.h"
@@ -53,10 +76,17 @@ typedef struct s_player {
 
 typedef struct s_map {
     char **map; // The map
+	char *north;
+	char *south;
+	char *east;
+	char *west;
+	int *floor;
+	int *ceiling;
     int map_w; // Map width
     int map_h; // Map height
     int player_x;
     int player_y;
+    mlx_texture_t *direction_img[4];
 } t_map;
 
 typedef struct s_ray	//the ray structure
@@ -75,13 +105,18 @@ typedef struct s_game	//the mlx structure
 	t_player		*ply;	// the player structure
 }	t_game;
 
-// Function Prototypes
-// void ft_hook(mlx_key_data_t key_game, void *param);
-// t_data *init_argument();
-// void start_the_game(t_data *data);
-// void render_player(t_data *data);
-// void output_map(t_data *dat);
-// void mlx_key(mlx_key_data_t keydata, void *ml);
+//parsing
+char	    *get_next_line(int fd);
+t_map		*parse(int argc, char **argv);
+void        parse_description(t_map *map, char **input);
+int         validate_descr(char **input);
+int         is_rgb_value(char *str);
+void        parse_map(t_map *map, char **input);
+//general utils
+int			error(int errnum);
+void        free_double_char(char **array);
+void        free_map_struct(t_map *map);
+//
 void mlx_key(mlx_key_data_t key_game, void *param);
 void	move_player(t_game *game, double move_x, double move_y);
 void	hook(t_game *mlx, double move_x, double move_y);

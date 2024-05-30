@@ -39,23 +39,27 @@ void	draw_floor_ceiling(t_game *mlx, int ray, int t_pix, int b_pix)	// draw the 
 		my_mlx_pixel_put(mlx, ray, i++, 0x89CFF3FF); // ceiling
 }
 
-int	get_color(t_game *mlx, int flag)	// get the color of the wall
+mlx_texture_t	*get_color(t_game *mlx, double flag)	// get the color of the wall
 {
+	mlx_texture_t *return_tex;
+	
+	return_tex = NULL;
 	mlx->ray->ray_ngl = nor_angle(mlx->ray->ray_ngl); // normalize the angle
 	if (flag == 0)
 	{
 		if (mlx->ray->ray_ngl > M_PI / 2 && mlx->ray->ray_ngl < 3 * (M_PI / 2))
-			return (0xB5B5B5FF); // west wall
+			return_tex = mlx->g_map->direction_img[WEST]; // west wall
 		else
-			return (0xB5B5B5FF); // east wall
+			return_tex = mlx->g_map->direction_img[EAST]; // west wall
 	}
 	else
 	{
 		if (mlx->ray->ray_ngl > 0 && mlx->ray->ray_ngl < M_PI)
-			return (0xF5F5F5FF); // south wall
+			return_tex = mlx->g_map->direction_img[SOUTH];  // south wall
 		else
-			return (0xF5F5F5FF); // north wall
+			return_tex = mlx->g_map->direction_img[NORTH];  // north wall
 	}
+	return (return_tex);
 }
 
 void	draw_wall(t_game *mlx, int ray, int t_pix, int b_pix)	// draw the wall

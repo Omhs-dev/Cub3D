@@ -4,22 +4,6 @@
 //############################## THE MOUVEMENT CODE ##############################//
 //################################################################################//
 
-// void	ft_reles(mlx_key_data_t keydata, t_game *mlx)	// release the key
-// {
-// 	if (keydata.key == MLX_KEY_D && (keydata.action == MLX_RELEASE))
-// 		mlx->ply->direc_x = 0;
-// 	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_RELEASE))
-// 		mlx->ply->direc_x = 0;
-// 	else if (keydata.key == MLX_KEY_S && (keydata.action == MLX_RELEASE))
-// 		mlx->ply->direc_y = 0;
-// 	else if (keydata.key == MLX_KEY_W && (keydata.action == MLX_RELEASE))
-// 		mlx->ply->direc_y = 0;
-// 	else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_RELEASE)
-// 		mlx->ply->rotation = 0;
-// 	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
-// 		mlx->ply->rotation = 0;
-// }
-
 void mlx_key(mlx_key_data_t key_game, void *param)
 {
 	t_game *game;
@@ -76,7 +60,7 @@ void mlx_key(mlx_key_data_t key_game, void *param)
 	// Check boundaries and if the new position is not a wall
 }
 
-static void	rotate_player(t_game *mlx, int i)	// rotate the player
+void	rotate_player(t_game *mlx, int i)	// rotate the player
 {
 	if (i == 1)
 	{
@@ -111,32 +95,3 @@ void	move_player(t_game *game, double move_x, double move_y)	// move the player
 		game->ply->player_y = new_y;
 	}
 }
-
-// void	hook(t_game *mlx, double move_x, double move_y)	// hook the player
-// {
-// 	if (mlx->ply->rotation == 1) //rotate right
-// 		rotate_player(mlx, 1);
-// 	if (mlx->ply->rotation == -1) //rotate left
-// 		rotate_player(mlx, 0);
-// 	if (mlx->ply->direc_x == 1) //move right
-// 	{
-// 		move_x = -sin(mlx->ply->p_angle) * PLAYER_SPEED;
-// 		move_y = cos(mlx->ply->p_angle) * PLAYER_SPEED;
-// 	}
-// 	if (mlx->ply->direc_x == -1) //move left
-// 	{
-// 		move_x = sin(mlx->ply->p_angle) * PLAYER_SPEED;
-// 		move_y = -cos(mlx->ply->p_angle) * PLAYER_SPEED;
-// 	}
-// 	if (mlx->ply->direc_y == 1) //move up
-// 	{
-// 		move_x = cos(mlx->ply->p_angle) * PLAYER_SPEED;
-// 		move_y = sin(mlx->ply->p_angle) * PLAYER_SPEED;
-// 	}
-// 	if (mlx->ply->direc_y == -1) //move down
-// 	{
-// 		move_x = -cos(mlx->ply->p_angle) * PLAYER_SPEED;
-// 		move_y = -sin(mlx->ply->p_angle) * PLAYER_SPEED;
-// 	}
-// 	move_player(mlx, move_x, move_y); // move the player
-// }
