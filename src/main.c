@@ -72,11 +72,15 @@ t_map *init_argument()	// init the data structure
 	return (dt); // return the data structure
 }
 
-int main(int argc, char **argv)	// main function
-{
-	t_map	*data;
+int main(int argc, char **argv) {
+    t_map *data;
 
-	data = parse(argc, argv);
-	start_the_game(data);
-	return (0);
+    data = parse(argc, argv);
+    if (!data) return (-1);
+    if (!start_the_game(data))
+    {
+        free_map_struct(data);
+        printf("error occur\n");
+    }
+    return (0);
 }

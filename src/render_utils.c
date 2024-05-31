@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:33:18 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/05/31 03:22:22 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/05/31 05:55:57 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ float	nor_angle(float angle)	// normalize the angle
 
 void ft_put_pixel(t_game *game, int x, int y, int c)
 {
-	if ((x >= 0 && x < WIDTH) && (y >= 0 && y < HEIGHT))
+	if ((x >= 0 && x < S_W) && (y >= 0 && y < S_H))
 		mlx_put_pixel(game->img, x, y, c);
 }
 
