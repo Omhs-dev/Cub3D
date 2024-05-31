@@ -7,6 +7,7 @@ LIBFT_PATH = "libs/libft/"
 SRCS =  ./src/main.c \
 		./src/movement.c \
 		./src/rendering.c \
+		./src/render_utils.c \
 		./src/raycasting.c \
 		./src/utils/errors.c \
 		./src/utils/free.c \

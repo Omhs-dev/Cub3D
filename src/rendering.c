@@ -1,74 +1,79 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rendering.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/30 16:33:44 by ohamadou          #+#    #+#             */
+/*   Updated: 2024/05/31 05:41:55 by ohamadou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/structs.h"
 
-//#####################################################################################//
-//############################## THE WALL RENDERING CODE ##############################//
-//#####################################################################################//
+void draw_ceiling_floor(t_game *mlx, int ray, int t_pix, int b_pix) {
+    int i;
+    int c;
 
-static void	my_mlx_pixel_put(t_game *mlx, int x, int y, int color)
-{
-	if (x < 0) // check the x position
-		return ;
-	else if (x >= S_W)
-		return ;
-	if (y < 0) // check the y position
-		return ;
-	else if (y >= S_H)
-		return ;
-	mlx_put_pixel(mlx->img, x, y, color); // put the pixel
+    i = b_pix;
+    if (mlx->g_map->ff && mlx->g_map->ff[RED] && mlx->g_map->ff[GREEN] && mlx->g_map->ff[BLUE]) {
+        c = rgb_color(atoi(mlx->g_map->ff[RED]), atoi(mlx->g_map->ff[GREEN]), atoi(mlx->g_map->ff[BLUE]), 255);
+        while (i < S_H) {
+            ft_put_pixel(mlx, ray, i++, c);
+        }
+    }
+
+    if (mlx->g_map->cc && mlx->g_map->cc[RED] && mlx->g_map->cc[GREEN] && mlx->g_map->cc[BLUE]) {
+        c = rgb_color(atoi(mlx->g_map->cc[RED]), atoi(mlx->g_map->cc[GREEN]), atoi(mlx->g_map->cc[BLUE]), 255);
+        i = 0;
+        while (i < t_pix) {
+            ft_put_pixel(mlx, ray, i++, c);
+        }
+    }
 }
 
-float	nor_angle(float angle)	// normalize the angle
+mlx_texture_t	*wall_texture(t_game *mlx, double flag)	// get the color of the wall
 {
-	if (angle < 0)
-		angle += (2 * M_PI);
-	if (angle > (2 * M_PI))
-		angle -= (2 * M_PI);
-	return (angle);
-}
-
-void	draw_floor_ceiling(t_game *mlx, int ray, int t_pix, int b_pix)	// draw the floor and the ceiling
-{
-	int		i;
-	// int		c;
-
-	i = b_pix;
-	while (i < S_H)
-		my_mlx_pixel_put(mlx, ray, i++, 0xB99470FF); // floor
-	i = 0;
-	while (i < t_pix)
-		my_mlx_pixel_put(mlx, ray, i++, 0x89CFF3FF); // ceiling
-}
-
-mlx_texture_t	*get_color(t_game *mlx, double flag)	// get the color of the wall
-{
-	mlx_texture_t *return_tex;
-	
-	return_tex = NULL;
 	mlx->ray->ray_ngl = nor_angle(mlx->ray->ray_ngl); // normalize the angle
 	if (flag == 0)
 	{
 		if (mlx->ray->ray_ngl > M_PI / 2 && mlx->ray->ray_ngl < 3 * (M_PI / 2))
-			return_tex = mlx->g_map->direction_img[WEST]; // west wall
+			return (mlx->g_map->tex->east);
 		else
-			return_tex = mlx->g_map->direction_img[EAST]; // west wall
+			return (mlx->g_map->tex->south);
 	}
 	else
 	{
 		if (mlx->ray->ray_ngl > 0 && mlx->ray->ray_ngl < M_PI)
-			return_tex = mlx->g_map->direction_img[SOUTH];  // south wall
+			return (mlx->g_map->tex->west);
 		else
-			return_tex = mlx->g_map->direction_img[NORTH];  // north wall
+			return (mlx->g_map->tex->north);
 	}
-	return (return_tex);
 }
 
-void	draw_wall(t_game *mlx, int ray, int t_pix, int b_pix)	// draw the wall
+void	draw_wall(t_game *mlx, int t_pix, int b_pix, double wall_h)	// draw the wall
 {
-	int color;
+	double x_o;
+	double y_o;
+	double factr;
+	mlx_texture_t *texture;
+	uint32_t *arr;
 
-	color = get_color(mlx, mlx->ray->flag);
+	texture = wall_texture(mlx, mlx->ray->flag);
+	arr = (uint32_t *)texture->pixels;
+	factr = (double)texture->height / wall_h;
+	x_o = get_x_offset(texture, mlx);
+	y_o = (t_pix - (S_H / 2) + (wall_h / 2)) * factr;
+	if (y_o < 0)
+		y_o = 0.0;
 	while (t_pix < b_pix)
-		my_mlx_pixel_put(mlx, ray, t_pix++, color);
+	{
+		ft_put_pixel(mlx, mlx->ray->ray_i, t_pix, get_color \
+		(arr[(int)y_o * texture->width + (int)x_o]));
+		y_o += factr;
+		t_pix++;
+	}
 }
 
 void	render_wall(t_game *mlx, int ray)	// render the wall
@@ -86,5 +91,6 @@ void	render_wall(t_game *mlx, int ray)	// render the wall
 	if (t_pix < 0) // check the top pixel
 		t_pix = 0;
 	draw_wall(mlx, ray, t_pix, b_pix); // draw the wall
-	draw_floor_ceiling(mlx, ray, t_pix, b_pix); // draw the floor and the ceiling
+	draw_ceiling_floor(mlx, ray, t_pix, b_pix); // draw the floor and the ceiling
 }
+

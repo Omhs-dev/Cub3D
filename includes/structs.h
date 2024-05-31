@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 03:36:39 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/05/30 05:32:26 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/05/31 05:32:48 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@
 # define SOUTH				1
 # define EAST				2
 # define WEST				3
+//color
+# define RED 0
+# define GREEN 1
+# define BLUE 2
 
 # include "cub3d.h"
 #include "../MLX42/include/MLX42/MLX42.h"
@@ -74,23 +78,37 @@ typedef struct s_player {
     double fov; // Field of view
 } t_player;
 
+typedef struct s_texture
+{
+	mlx_texture_t *north;
+	mlx_texture_t *south;
+	mlx_texture_t *west;
+	mlx_texture_t *east;
+} t_texture;
+
 typedef struct s_map {
     char **map; // The map
 	char *north;
 	char *south;
 	char *east;
 	char *west;
+	char	**ff;
+	char	**cc;
 	int *floor;
 	int *ceiling;
     int map_w; // Map width
     int map_h; // Map height
     int player_x;
     int player_y;
+	t_texture       *tex;
     mlx_texture_t *direction_img[4];
 } t_map;
 
 typedef struct s_ray	//the ray structure
-{
+{   
+	int ray_i;
+	double hor_x;
+	double hor_y;
 	double	ray_ngl;	// ray angle
 	double	distance;	// distance to the wall
 	int		flag;		// flag for the wall
@@ -105,6 +123,14 @@ typedef struct s_game	//the mlx structure
 	t_player		*ply;	// the player structure
 }	t_game;
 
+typedef struct s_direction
+{
+	char *north;
+	char *south;
+	char *east;
+	char *weast;
+} t_direction;
+
 //parsing
 char	    *get_next_line(int fd);
 t_map		*parse(int argc, char **argv);
@@ -116,14 +142,18 @@ void        parse_map(t_map *map, char **input);
 int			error(int errnum);
 void        free_double_char(char **array);
 void        free_map_struct(t_map *map);
-//
+//redering
+void ft_put_pixel(t_game *game, int x, int y, int c);
+uint32_t rgb_color(int r, int g, int b, int a);
+int get_color(int c);
+double get_x_offset(mlx_texture_t *tex, t_game *game);
 void mlx_key(mlx_key_data_t key_game, void *param);
 void	move_player(t_game *game, double move_x, double move_y);
-void	hook(t_game *mlx, double move_x, double move_y);
+// start game
+int load_texture(t_map *game);
 void	ft_exit(t_game *mlx);
-void	draw_floor_ceiling(t_game *mlx, int ray, int t_pix, int b_pix);
-int	get_color(t_game *mlx, int flag);
-void	draw_wall(t_game *mlx, int ray, int t_pix, int b_pix);
+void	draw_ceiling_floor(t_game *mlx, int ray, int t_pix, int b_pix);
+void	draw_wall(t_game *mlx, int t_pix, int b_pix, double wall_h);
 void	render_wall(t_game *mlx, int ray);
 float	nor_angle(float angle);
 int	unit_circle(float angle, char c);
