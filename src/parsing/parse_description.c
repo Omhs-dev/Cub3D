@@ -90,6 +90,7 @@ void    parse_description(t_map *map, char **input)
     dscrptn = malloc(sizeof(char *) * (6 + 1));
     while (i < 7)
         dscrptn[i++] = NULL;
+    printf("parse desc\n");
     copy_description(input, dscrptn, map);
     if (!validate_descr(dscrptn))
     {

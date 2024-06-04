@@ -29,11 +29,13 @@ static char **read_file(char *file)
 	input = malloc(sizeof(char *) * (count + 1));
 	count = 0;
 	temp = get_next_line(fd);
+    printf("draw wall\n");
 	while(temp)
 	{
 		input[count++] = temp;
 		temp = get_next_line(fd);
 	}
+    printf("line readfile: %s\n", input[1]);
 	return (input[count] = NULL, close(fd), input);
 }
 
@@ -60,6 +62,7 @@ t_map *parse(int argc, char **argv)
 
 	if (argc != 2)
 		error(WRONG_ARGS_NUM);
+    printf("parse here\n");
 	check_extension(argv[1]);
 	input = read_file(argv[1]);
 	map = malloc(sizeof(t_map));

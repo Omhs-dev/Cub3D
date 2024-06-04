@@ -6,19 +6,28 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:33:18 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/05/31 05:55:57 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/04 04:56:08 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/structs.h"
 
-float	nor_angle(float angle)	// normalize the angle
+// float	nor_angle(float angle)	// normalize the angle
+// {
+// 	if (angle < 0)
+// 		angle += (2 * M_PI);
+// 	if (angle > (2 * M_PI))
+// 		angle -= (2 * M_PI);
+// 	return (angle);
+// }
+
+float nor_angle(float angle)
 {
-	if (angle < 0)
-		angle += (2 * M_PI);
-	if (angle > (2 * M_PI))
-		angle -= (2 * M_PI);
-	return (angle);
+    angle = fmod(angle, 2 * M_PI);
+    if (angle < 0) {
+        angle += 2 * M_PI;
+    }
+    return angle;
 }
 
 void ft_put_pixel(t_game *game, int x, int y, int c)

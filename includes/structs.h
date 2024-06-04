@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 03:36:39 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/05/31 07:05:57 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/04 06:13:50 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,13 @@ typedef struct s_color
 	int					blue;
 }	t_color;
 
+typedef struct s_txtr
+{
+	char			*key;
+	char			*value;
+	struct s_txtr	*next;
+}	t_txtr;
+
 typedef struct s_ray	//the ray structure
 {   
 	int ray_i;
@@ -126,6 +133,9 @@ typedef struct s_ray	//the ray structure
 	double	ray_ngl;	// ray angle
 	double	distance;	// distance to the wall
 	int		flag;		// flag for the wall
+	int hit_x;  // X-coordinate of the hit on the wall
+    int hit_y;
+    t_texture *hit_tex;
 }	t_ray;
 
 typedef struct s_game	//the mlx structure
@@ -169,10 +179,11 @@ void	move_player(t_game *game, double move_x, double move_y);
 int load_texture(t_texture *tex, t_map *game);
 void	ft_exit(t_game *mlx);
 //floor
-// void	draw_ceiling_floor(t_game *mlx, int ray, int t_pix, int b_pix);
-void	draw_ceiling_floor(t_game *mlx, int ray, int top_px, int bottom_px);
+void	draw_ceiling_floor(t_game *mlx, int ray, int t_pix, int b_pix);
+// void draw_ceiling_floor(t_game *mlx);
+// void	draw_ceiling_floor(t_game *mlx, int ray, int top_px, int bottom_px);
 void	draw_wall(t_game *mlx, int t_pix, int b_pix, double wall_h);
-void	render_wall(t_game *mlx, int ray);
+// void	render_wall(t_game *mlx, int ray);
 float	nor_angle(float angle);
 int	unit_circle(float angle, char c);
 int	inter_check(float angle, float *inter, float *step, int is_horizon);
@@ -184,5 +195,10 @@ void	game_loop(void *ml);
 void init_the_player(t_game mlx);	// init the player structure
 int	start_the_game(t_map *dt);	// start the game
 // int	load_textures(t_game *cub3d);
+char **ft_splittt(char *s, char c);
+void hook(t_game *mlx, double move_x, double move_y);
+void	get_angle(t_game *mlx);
+void	render_wall(t_game *mlx, int ray);
+void render_walls(t_game *mlx);
 
 #endif
