@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 03:36:39 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/04 06:13:50 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/04 22:50:40 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_player {
     int rotation;
     double p_angle; // Player angle
     double p_speed; // Player speed
-    double fov; // Field of view
+    float fov; // Field of view
 } t_player;
 
 typedef struct s_texture
@@ -91,6 +91,11 @@ typedef struct s_texture
 	mlx_texture_t *west;
 	mlx_texture_t *east;
 } t_texture;
+
+typedef struct s_tmp
+{
+	int id;
+}	t_tmp;
 
 typedef struct s_map {
     char **map; // The map
@@ -106,9 +111,7 @@ typedef struct s_map {
     int map_h; // Map height
     int player_x;
     int player_y;
-    struct s_direction *directions;
-    struct s_color *color[2];
-    mlx_texture_t *direction_img[4];
+    // t_txtr *texx;
 } t_map;
 
 typedef struct s_color
@@ -117,13 +120,6 @@ typedef struct s_color
 	int					green;
 	int					blue;
 }	t_color;
-
-typedef struct s_txtr
-{
-	char			*key;
-	char			*value;
-	struct s_txtr	*next;
-}	t_txtr;
 
 typedef struct s_ray	//the ray structure
 {   
@@ -135,6 +131,7 @@ typedef struct s_ray	//the ray structure
 	int		flag;		// flag for the wall
 	int hit_x;  // X-coordinate of the hit on the wall
     int hit_y;
+    int is_vertical;
     t_texture *hit_tex;
 }	t_ray;
 
@@ -146,6 +143,7 @@ typedef struct s_game	//the mlx structure
 	t_map			*g_map;	// the data structure
 	t_player		*ply;	// the player structure
 	t_texture       *tex;
+	t_tmp           *temp;
 }	t_game;
 
 typedef struct s_direction
@@ -170,18 +168,20 @@ void        free_map_struct(t_map *map);
 //redering
 void ft_put_pixel(t_game *game, int x, int y, int c);
 uint32_t rgb_color(int r, int g, int b, int a);
-int get_color(int c);
-double get_x_offset(mlx_texture_t *tex, t_game *game);
+// int get_color(int c);
+unsigned int get_color(int c);
+// double get_x_offset(mlx_texture_t *tex, t_game *game);
+double	get_x_offset(mlx_texture_t *texture, t_game *data);
 void mlx_key(mlx_key_data_t key_game, void *param);
 void	move_player(t_game *game, double move_x, double move_y);
 // start game
-// int load_texture(t_map *game);
-int load_texture(t_texture *tex, t_map *game);
+int load_texture(t_game game);
+// int load_texture(t_texture *tex, t_map *game);
 void	ft_exit(t_game *mlx);
 //floor
-void	draw_ceiling_floor(t_game *mlx, int ray, int t_pix, int b_pix);
+// void	draw_ceiling_floor(t_game *mlx, int ray, int t_pix, int b_pix);
 // void draw_ceiling_floor(t_game *mlx);
-// void	draw_ceiling_floor(t_game *mlx, int ray, int top_px, int bottom_px);
+void	draw_ceiling_floor(t_game *mlx, int ray, int t_pix, int b_pix);
 void	draw_wall(t_game *mlx, int t_pix, int b_pix, double wall_h);
 // void	render_wall(t_game *mlx, int ray);
 float	nor_angle(float angle);
@@ -193,12 +193,15 @@ float	get_v_inter(t_game *mlx, float angl);
 void	cast_rays(t_game *mlx);
 void	game_loop(void *ml);
 void init_the_player(t_game mlx);	// init the player structure
-int	start_the_game(t_map *dt);	// start the game
+int start_the_game(t_map *dt);
 // int	load_textures(t_game *cub3d);
 char **ft_splittt(char *s, char c);
 void hook(t_game *mlx, double move_x, double move_y);
 void	get_angle(t_game *mlx);
 void	render_wall(t_game *mlx, int ray);
 void render_walls(t_game *mlx);
+// mlx_texture_t	*wall_texture(t_game *mlx, double flag);
+mlx_texture_t	*wall_texture(t_game *mlx, int flag);
+// int	load_texture(t_texture *tex, t_txtr *l_ture);
 
 #endif

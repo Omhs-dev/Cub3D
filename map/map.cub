@@ -3,8 +3,8 @@ SO ./assets/image1.png
 WE ./assets/image2.png
 EA ./assets/image3.png
 
-F 220,100,0
-C 225,30,0
+F 100,50,5
+C 20,50,100
 
 		1111111111111111111111111
 		1000000000110000000000001

@@ -40,18 +40,22 @@ int	inter_check(float angle, float *inter, float *step, int is_horizon)
 
 int	wall_hit(float x, float y, t_game *mlx)
 {
-	int		x_m;
-	int		y_m;
+	int	x_m;
+	int	y_m;
 
 	if (x < 0 || y < 0)
 		return (0);
-	x_m = floor (x / TILE_SIZE);
-	y_m = floor (y / TILE_SIZE);
+	x_m = floor(x / TILE_SIZE);
+	y_m = floor(y / TILE_SIZE);
 	if ((y_m >= mlx->g_map->map_h || x_m >= mlx->g_map->map_w))
 		return (0);
-	if (mlx->g_map->map[y_m] && x_m <= (int)ft_strlen(mlx->g_map->map[y_m]))
+	if (mlx->g_map->map[y_m] && x_m <= (int)strlen(mlx->g_map->map[y_m]))
+	{
 		if (mlx->g_map->map[y_m][x_m] == '1')
 			return (0);
+		else
+			return (1);
+	}
 	return (1);
 }
 
@@ -79,7 +83,7 @@ float	get_h_inter(t_game *mlx, float angl)
 	mlx->ray->hor_x = h_x;
 	mlx->ray->hor_y = h_y;
 	return (sqrt(pow(h_x - mlx->ply->player_x, 2) + \
-	pow(h_y - mlx->ply->player_y, 2)));
+	pow(h_y - mlx->ply->player_y, 2)) + 0.00001);
 }
 
 float	get_v_inter(t_game *mlx, float angl)
@@ -117,7 +121,7 @@ void	cast_rays(t_game *mlx)
 
 	ray = 0;
 	mlx->ray->ray_ngl = mlx->ply->p_angle - (mlx->ply->fov / 2);
-	while (ray < S_W)
+	while (ray <= S_W)
 	{
 		mlx->ray->flag = 0;
 		h_inter = get_h_inter(mlx, nor_angle(mlx->ray->ray_ngl));
@@ -134,3 +138,27 @@ void	cast_rays(t_game *mlx)
 		mlx->ray->ray_ngl += (mlx->ply->fov / S_W);
 	}
 }
+
+// void cast_rays(t_game *mlx) {
+//     double h_inter;
+//     double v_inter;
+//     int ray;
+
+//     ray = 0;
+//     mlx->ray->ray_ngl = nor_angle(mlx->ply->p_angle - (mlx->ply->fov / 2));
+//     while (ray < S_W) {
+//         mlx->ray->flag = 0;
+//         h_inter = get_h_inter(mlx, nor_angle(mlx->ray->ray_ngl));
+//         v_inter = get_v_inter(mlx, nor_angle(mlx->ray->ray_ngl));
+//         if (v_inter <= h_inter) {
+//             mlx->ray->distance = v_inter;
+//             mlx->ray->is_vertical = 1;
+//         } else {
+//             mlx->ray->distance = h_inter;
+//             mlx->ray->is_vertical = 0;
+//         }
+//         render_wall(mlx, ray);
+//         ray++;
+//         mlx->ray->ray_ngl += (mlx->ply->fov / S_W);
+//     }
+// }
