@@ -139,7 +139,7 @@ void	move_player(t_game *game, double move_x, double move_y)
 	}
 }
 
-void hook(t_game *mlx, double move_x, double move_y) // hook the player
+void hook(t_game *mlx, double move_x, double move_y)
 {
 	if (mlx->ply->rotation == 1) //rotate right
 		rotate_player(mlx, 1);

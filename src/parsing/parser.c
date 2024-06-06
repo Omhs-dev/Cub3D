@@ -14,7 +14,7 @@ static int	count_lines(int fd)
 	return (close(fd), i);
 }
 
-static char **read_file(char *file)
+char **read_file(char *file)
 {
 	char	**input;
 	char	*temp;

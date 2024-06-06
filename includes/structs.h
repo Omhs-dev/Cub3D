@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 03:36:39 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/06 15:24:32 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/06 17:30:01 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct s_tmp
 
 typedef struct s_map {
     char **map; // The map
+    char **sec_map;
 	char *north;
 	char *south;
 	char *east;
@@ -136,6 +137,7 @@ typedef struct s_game	//the mlx structure
 // } t_direction;
 
 //parsing
+char **read_file(char *file);
 char	    *get_next_line(int fd);
 t_map		*parse(int argc, char **argv);
 void        parse_description(t_map *map, char **input);
@@ -185,5 +187,6 @@ void render_walls(t_game *mlx);
 // mlx_texture_t	*wall_texture(t_game *mlx, double flag);
 mlx_texture_t	*wall_texture(t_game *mlx, int flag);
 // int	load_texture(t_texture *tex, t_txtr *l_ture);
+void	move_player(t_game *data, double move_x, double move_y);
 
 #endif
