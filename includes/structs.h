@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 03:36:39 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/04 22:50:40 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/05 23:18:49 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 
 # define S_W 1900 // screen width
 # define S_H 1000 // screen height
-# define TILE_SIZE 30 // tile size
+# define TILE_SIZE 15 // tile size
 # define FOV 60 // field of view
-# define ROTATION_SPEED 0.090 // rotation speed
+# define ROTATION_SPEED 0.045 // rotation speed
 # define PLAYER_SPEED 8	// player speed
 
 ///////////////////////parsing////////////////////
@@ -172,6 +172,7 @@ uint32_t rgb_color(int r, int g, int b, int a);
 unsigned int get_color(int c);
 // double get_x_offset(mlx_texture_t *tex, t_game *game);
 double	get_x_offset(mlx_texture_t *texture, t_game *data);
+// void mlx_key(mlx_key_data_t key_game, void *param);
 void mlx_key(mlx_key_data_t key_game, void *param);
 void	move_player(t_game *game, double move_x, double move_y);
 // start game

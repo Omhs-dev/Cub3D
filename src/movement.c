@@ -75,13 +75,22 @@ void mlx_key(mlx_key_data_t keydata, void *game_ptr) {
     if (keydata.key == MLX_KEY_ESCAPE && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
         mlx_close_window(game->mlx);
     else if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
+    {
+        printf("pos %d\n", game->ply->player_x);
+        printf("dir %d\n", game->ply->direc_x);
         game->ply->direc_x = -1;
+    }
     else if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
         game->ply->direc_x = 1;
     else if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
         game->ply->direc_y = -1;
+        // game->ply->player_x = game->ply->player_x * game->ply->direc_x * game->ply->p_speed;
     else if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
+    {
+        printf("posy %d\n", game->ply->player_y);
+        printf("posx %d\n", game->ply->player_x);
         game->ply->direc_y = 1;
+    }
     else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
         game->ply->rotation = -1;
     else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
@@ -138,8 +147,8 @@ void hook(t_game *mlx, double move_x, double move_y) // hook the player
 		rotate_player(mlx, 0);
 	if (mlx->ply->direc_x == 1) //move right
 	{
-		move_x = -sin(mlx->ply->p_angle) * PLAYER_SPEED;
-		move_y = cos(mlx->ply->p_angle) * PLAYER_SPEED;
+		move_x = (-sin(mlx->ply->p_angle) * PLAYER_SPEED);
+		move_y = (cos(mlx->ply->p_angle) * PLAYER_SPEED);
 	}
 	if (mlx->ply->direc_x == -1) //move left
 	{

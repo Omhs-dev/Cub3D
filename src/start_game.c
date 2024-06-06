@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 04:27:18 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/04 22:50:17 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:04:55 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ void	game_loop(void *ml)
 
 void init_the_player(t_game mlx)
 {
-	mlx.ply->player_x = mlx.g_map->player_x * TILE_SIZE + TILE_SIZE / 2;
-	mlx.ply-> player_y= mlx.g_map->player_y * TILE_SIZE + TILE_SIZE / 2;
-	mlx.ply->fov = (FOV * M_PI) / 180;
+	mlx.ply->player_x = (mlx.g_map->player_x * TILE_SIZE) + TILE_SIZE / 2;
+	mlx.ply->player_y = (mlx.g_map->player_y * TILE_SIZE) + TILE_SIZE / 2;
+	mlx.ply->fov = (FOV * M_PI / 180);
 	mlx.ply->p_angle = M_PI;
+	printf("map pos %d\n", mlx.g_map->player_x);
+	printf("player pos %d\n", mlx.ply->player_x);
 }
 
 int load_texture(t_game game)
@@ -59,12 +61,12 @@ int start_the_game(t_map *dt)
     //     return (1);
     mlx.g_map = dt;
     mlx.mlx = mlx_init(S_W, S_H, "Cub3D", 0);
+    if (load_texture(mlx) == 1)
+        return (1);
     // if (!mlx.mlx)
     //     return (1);
     printf("here\n");
     printf("direction: %s\n", mlx.g_map->east);
-    if (load_texture(mlx) == 1)
-        return (1);
     init_the_player(mlx);
     mlx_loop_hook(mlx.mlx, &game_loop, &mlx);
     mlx_key_hook(mlx.mlx, &mlx_key, &mlx);
