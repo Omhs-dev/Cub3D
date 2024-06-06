@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:33:44 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/06 15:20:17 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:26:11 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void	draw_ceiling_floor(t_game *mlx, int ray, int t_pix, int b_pix)
 	int		c;
 
 	i = b_pix;
-	c = rgb_color((mlx->g_map->floor[0]), (mlx->g_map->floor[1]), \
-		(mlx->g_map->floor[2]), 255);
+	c = rgb_color((mlx->g_map->floor[RED]), (mlx->g_map->floor[GREEN]), \
+		(mlx->g_map->floor[BLUE]), 255);
 	while (i < S_H)
 		ft_put_pixel(mlx, ray, i++, c);
-	c = rgb_color((mlx->g_map->ceiling[0]), (mlx->g_map->ceiling[1]), \
-		(mlx->g_map->ceiling[2]), 255);
+	c = rgb_color((mlx->g_map->ceiling[0]), (mlx->g_map->ceiling[GREEN]), \
+		(mlx->g_map->ceiling[BLUE]), 255);
 	i = 0;
 	while (i < t_pix)
 		ft_put_pixel(mlx, ray, i++, c);

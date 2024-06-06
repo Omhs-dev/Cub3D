@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 03:36:39 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/05 23:18:49 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:24:32 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,6 @@
 # define FILE_OPEN 4
 # define MAP_DESCRIPTION 5
 # define INVALID_MAP 6
-
-// Drections
-# define NORTH				0
-# define SOUTH				1
-# define EAST				2
-# define WEST				3
 //color
 # define RED 0
 # define GREEN 1
@@ -66,12 +60,6 @@
 #define WIDTH 512
 #define HEIGHT 512
 #define BPP sizeof(int32_t)
-
-typedef enum e_colors_indicators
-{
-	ground	=	0,
-	ceiling	=	1
-}	t_colors_indicators;
 
 typedef struct s_player {
     int player_x; // Player x position in pixels
@@ -114,13 +102,6 @@ typedef struct s_map {
     // t_txtr *texx;
 } t_map;
 
-typedef struct s_color
-{
-	int					red;
-	int					green;
-	int					blue;
-}	t_color;
-
 typedef struct s_ray	//the ray structure
 {   
 	int ray_i;
@@ -146,13 +127,13 @@ typedef struct s_game	//the mlx structure
 	t_tmp           *temp;
 }	t_game;
 
-typedef struct s_direction
-{
-	char *north;
-	char *south;
-	char *east;
-	char *weast;
-} t_direction;
+// typedef struct s_direction
+// {
+// 	char *north;
+// 	char *south;
+// 	char *east;
+// 	char *weast;
+// } t_direction;
 
 //parsing
 char	    *get_next_line(int fd);
