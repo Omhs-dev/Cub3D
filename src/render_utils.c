@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:33:18 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/04 22:01:32 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/08 17:37:21 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,6 @@ unsigned int get_color(int c)
 	return (((c & 0x000000FF) << 24) | ((c & 0x0000FF00) << 8)
 		| ((c & 0x00FF0000) >> 8) | ((c & 0xFF000000) >> 24));
 }
-
-// double get_x_offset(mlx_texture_t *tex, t_game *game)
-// {
-// 	double x_o;
-	
-// 	if (game->ray->flag == 1)
-// 		x_o = (int)fmodf((game->ray->hor_x * (tex->width / TILE_SIZE)), tex->width);
-// 	else
-// 		x_o = (int)fmodf((game->ray->hor_y * (tex->width / TILE_SIZE)), tex->width);
-// 	return (x_o);
-// }
 
 double	get_x_offset(mlx_texture_t *texture, t_game *data)
 {

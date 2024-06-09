@@ -1,4 +1,4 @@
-NAME = cube3d
+NAME = cube3D
 
 LIBFT = libs/libft/libft.a
 
@@ -7,17 +7,18 @@ LIBFT_PATH = "libs/libft/"
 SRCS =  ./src/main.c \
 		./src/movement.c \
 		./src/rendering.c \
-		./src/render_utils.c \
 		./src/raycasting.c \
-		./src/utils/errors.c \
-		./src/utils/free.c \
 		./src/start_game.c \
-		./src/parsing/parse_description.c \
-		./src/parsing/parse_map.c \
+		./src/utils/free.c \
+		./src/utils/errors.c \
+		./src/render_utils.c \
 		./src/parsing/parser.c \
+		./src/movement_utils.c \
+		./src/parsing/parse_map.c \
 		./src/parsing/valid_utils.c \
 		./src/parsing/validate_descr.c \
-		# src/init.c 
+		./src/parsing/parse_description.c \
+		src/init.c 
 # src/utils.c
 RM = rm -f
 

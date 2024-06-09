@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 03:36:39 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/06 17:30:01 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/08 19:52:00 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define S_W 1900 // screen width
 # define S_H 1000 // screen height
-# define TILE_SIZE 15 // tile size
+# define TILE_SIZE 30 // tile size
 # define FOV 60 // field of view
 # define ROTATION_SPEED 0.045 // rotation speed
 # define PLAYER_SPEED 8	// player speed
@@ -136,6 +136,10 @@ typedef struct s_game	//the mlx structure
 // 	char *weast;
 // } t_direction;
 
+
+void free_split(char **split);
+int parse_colors(char *line, int **colors);
+t_map *parse_map1(const char *file_path);
 //parsing
 char **read_file(char *file);
 char	    *get_next_line(int fd);
@@ -180,7 +184,7 @@ void init_the_player(t_game mlx);	// init the player structure
 int start_the_game(t_map *dt);
 // int	load_textures(t_game *cub3d);
 char **ft_splittt(char *s, char c);
-void hook(t_game *mlx, double move_x, double move_y);
+void move_hook(t_game *game, double move_x, double move_y);
 void	get_angle(t_game *mlx);
 void	render_wall(t_game *mlx, int ray);
 void render_walls(t_game *mlx);
@@ -188,5 +192,6 @@ void render_walls(t_game *mlx);
 mlx_texture_t	*wall_texture(t_game *mlx, int flag);
 // int	load_texture(t_texture *tex, t_txtr *l_ture);
 void	move_player(t_game *data, double move_x, double move_y);
+void mlx_key(mlx_key_data_t key_game, void *param);
 
 #endif

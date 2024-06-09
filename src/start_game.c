@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 04:27:18 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/06 17:14:09 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/08 19:27:35 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	game_loop(void *ml)
 	mlx = ml;
 	mlx_delete_image(mlx->mlx, mlx->img);
 	mlx->img = mlx_new_image(mlx->mlx, S_W, S_H);
-	hook(mlx, 0, 0);
+	move_hook(mlx, 0, 0);
 	// draw_ceiling_floor(mlx);
 	cast_rays(mlx);
 	mlx_image_to_window(mlx->mlx, mlx->img, 0, 0);
@@ -72,5 +72,20 @@ int start_the_game(t_map *dt)
 	mlx_key_hook(mlx.mlx, &mlx_key, &mlx);
 	mlx_loop(mlx.mlx);
 	mlx_close_window(mlx.mlx);
+	
+	for (int i = 0; i < dt->map_h; i++)
+        free(dt->map[i]);
+    free(dt->map);
+    free(dt->north);
+    free(dt->south);
+    free(dt->east);
+    free(dt->west);
+    free(dt->floor);
+    free(dt->ceiling);
+    free(dt);
+    free(mlx.ply);
+    free(mlx.ray);
+    free(mlx.tex);
+	
 	return (0);
 }
