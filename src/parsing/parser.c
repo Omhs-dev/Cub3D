@@ -14,7 +14,7 @@ static int	count_lines(int fd)
 	return (close(fd), i);
 }
 
-char **read_file(char *file)
+char **read_file(const char *file)
 {
 	char	**input;
 	char	*temp;
@@ -55,6 +55,7 @@ static void check_extension(char *filename)
 	}
 	free(extension);
 }
+
 t_map *parse(int argc, char **argv)
 {
 	t_map	*map;
@@ -69,5 +70,6 @@ t_map *parse(int argc, char **argv)
 	map = malloc(sizeof(t_map));
 	parse_description(map, input);
     parse_map(map, input);
+	// find_player_position(map);
 	return (map);
 }

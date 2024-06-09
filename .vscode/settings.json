@@ -35,6 +35,7 @@
 		"ratio": "c",
 		"system_error": "c",
 		"tuple": "c",
-		"type_traits": "c"
+		"type_traits": "c",
+		"get_next_line.h": "c"
 	}
 }

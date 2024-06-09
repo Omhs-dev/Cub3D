@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 03:36:39 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/08 19:52:00 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/09 05:50:11 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,13 +135,13 @@ typedef struct s_game	//the mlx structure
 // 	char *east;
 // 	char *weast;
 // } t_direction;
-
-
+char *get_next_lines(int fd);
+char **read_files(const char *file_path);
 void free_split(char **split);
 int parse_colors(char *line, int **colors);
 t_map *parse_map1(const char *file_path);
 //parsing
-char **read_file(char *file);
+char **read_file(const char *file);
 char	    *get_next_line(int fd);
 t_map		*parse(int argc, char **argv);
 void        parse_description(t_map *map, char **input);

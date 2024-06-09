@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 04:27:18 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/08 19:27:35 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/09 07:22:40 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,34 @@ void	game_loop(void *ml)
 	mlx_image_to_window(mlx->mlx, mlx->img, 0, 0);
 }
 
+static void	find_player_position(t_map *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (++y < data->map_h)
+	{
+		x = 0;
+		while (++x < data->map_w)
+		{
+			if (data->map[y][x] == 'N' || data->map[y][x] == 'S' ||
+                data->map[y][x] == 'E' || data->map[y][x] == 'W')
+			{
+				data->player_x = x;
+				data->player_y = y;
+				data->map[y][x] = '0';
+				return ;
+			}
+		}
+	}
+	data->player_x = -1;
+    data->player_y = -1;
+}
+
 void init_the_player(t_game mlx)
 {
+	find_player_position(mlx.g_map);
 	mlx.ply->player_x = (mlx.g_map->player_x * TILE_SIZE) + TILE_SIZE / 2;
 	mlx.ply->player_y = (mlx.g_map->player_y * TILE_SIZE) + TILE_SIZE / 2;
 	mlx.ply->fov = (FOV * M_PI / 180);
@@ -73,8 +99,7 @@ int start_the_game(t_map *dt)
 	mlx_loop(mlx.mlx);
 	mlx_close_window(mlx.mlx);
 	
-	for (int i = 0; i < dt->map_h; i++)
-        free(dt->map[i]);
+	free_map_struct(dt);
     free(dt->map);
     free(dt->north);
     free(dt->south);

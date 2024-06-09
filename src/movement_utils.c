@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 19:40:07 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/08 19:50:00 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/09 07:20:05 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ void	move_player(t_game *game, double move_x, double move_y)
 	new_y = roundf(game->ply->player_y + move_y);
 	map_grid_x = (new_x / TILE_SIZE);
 	map_grid_y = (new_y / TILE_SIZE);
-	if (map_grid_x >= 0 && map_grid_x < game->g_map->map_w
-		&& map_grid_y >= 0 && map_grid_y < game->g_map->map_h
-		&& game->g_map->map[map_grid_y][map_grid_x] != '1')
-	{
+	// if (map_grid_x >= 0 && map_grid_x < game->g_map->map_w
+	// 	&& map_grid_y >= 0 && map_grid_y < game->g_map->map_h
+	// 	&& game->g_map->map[map_grid_y][map_grid_x] != '1')
+	// {
 		game->ply->player_x = new_x;
 		game->ply->player_y = new_y;
-	}
+	// }
 }
 
 void move_hook(t_game *game, double move_x, double move_y)
