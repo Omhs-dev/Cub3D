@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 05:39:31 by voszadcs          #+#    #+#             */
-/*   Updated: 2024/06/10 10:52:35 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/10 11:03:50 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,4 @@ int	main(int argc, char **argv)
 // 	mmain(argc, argv);
 // 	system("leaks a.out");
 // }
-//hey this is a test
+//hey this is a test to see if it works
