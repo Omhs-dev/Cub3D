@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 07:37:54 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/10 09:02:15 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:11:42 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ void 		move_hook(t_game *game, double move_x, double move_y);
 void		render_wall(t_game *mlx, int ray);
 void		ray_casting(t_game *game);
 float		nor_angle(float angle);
+float	hor_inter(t_game *game, float angl);
+float	vert_inter(t_game *game, float angl);
 int	check_u_circle(float angle, char c);
 void 		ft_put_pixel(t_game *game, int x, int y, int c);
 uint32_t 	rgb_color(int r, int g, int b, int a);

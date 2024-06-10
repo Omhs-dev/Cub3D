@@ -27,6 +27,7 @@ SRC:= 	./src/main.c \
 		./src/game/movement_utils.c \
 		./src/game/movement.c \
 		./src/game/raycasting.c \
+		./src/game/intersection.c \
 		./src/game/render_utils.c \
 		./src/game/rendering.c \
 
