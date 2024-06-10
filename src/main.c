@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: voszadcs <voszadcs@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 05:39:31 by voszadcs          #+#    #+#             */
-/*   Updated: 2024/06/10 05:40:41 by voszadcs         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:52:35 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,3 +27,4 @@ int	main(int argc, char **argv)
 // 	mmain(argc, argv);
 // 	system("leaks a.out");
 // }
+//hey this is a test
