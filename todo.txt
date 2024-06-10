@@ -1,6 +1,0 @@
-1   Calculate the distance
-	find horizontal intersection
-	find vertical intersection
-	find the nearest intersection
-	
-2 Render based on the distance

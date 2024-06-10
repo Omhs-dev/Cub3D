@@ -1,88 +1,80 @@
-NAME = cube3D
+NAME:=	cub3D
 
-LIBFT = libs/libft/libft.a
+BLACK=\033[0;30m
+RED=\033[0;31m
+GREEN=\033[0;32m
+YELLOW=\033[0;33m
+BLUE=\033[0;34m
+MAGENTA=\033[0;35m
+CYAN=\033[0;36m
+WHITE=\033[0;37m
+NC=\033[0m
 
-LIBFT_PATH = "libs/libft/"
+INCLUDE:= -Iinclude -Ilibft/includes
 
-SRCS =  ./src/main.c \
-		./src/movement.c \
-		./src/rendering.c \
-		./src/raycasting.c \
-		./src/start_game.c \
-		./src/utils/free.c \
-		./src/utils/errors.c \
-		./src/render_utils.c \
+SRC:= 	./src/main.c \
+		./src/game/start_game.c \
 		./src/parsing/parser.c \
-		./src/movement_utils.c \
-		./src/parsing/parse_map.c \
-		./src/parsing/valid_utils.c \
-		./src/parsing/validate_descr.c \
 		./src/parsing/parse_description.c \
-		src/init.c 
-# src/utils.c
-RM = rm -f
+		./src/parsing/validate_descr.c \
+		./src/parsing/valid_utils.c \
+		./src/parsing/parse_map.c \
+		./src/parsing/valid_map.c \
+		./src/utils/errors.c \
+		./src/utils/free.c \
+		./src/get_next_line/get_next_line.c \
+		./src/get_next_line/get_next_line_utils.c \
+		./src/game/movement_utils.c \
+		./src/game/movement.c \
+		./src/game/raycasting.c \
+		./src/game/render_utils.c \
+		./src/game/rendering.c \
 
-INCS	= -I ./includes/
+OBJ:=	$(SRC:.c=.o)
 
-CC = cc
+FLAGS:=	-Wall -Werror -Wextra
+#FLAGS+= -g3 -fsanitize=address
 
-FLAGS = -g -Wall -Wextra -Werror  MLX42/build/libmlx42.a -Iinclude -lglfw -L"/Users/ohamadou/homebrew/opt/glfw/lib/" -fsanitize=address -static-libsan
+CC:= gcc
 
-OBJS = $(SRCS:.c=.o)
+# Detect the operating system
+UNAME_S := $(shell uname -s)
 
-OBJ_B = $(SRC_B:.c=.o)
+# Default values
+LIBS := -ldl -lglfw -pthread -lm
+MLX_DIR := lib/MLX42
 
-$(NAME):	$(OBJS)
-		@make -C $(LIBFT_PATH)
-		@${CC} $(FLAGS) $(SRCS) $(LIBFT) -o ${NAME}
-# $(BONUS_NAME) : $(OBJ_B)
-# 		@${CC} $(FLAGS) $(SRC_B) -o checker
+# Adjust values based on the operating system
+ifeq ($(UNAME_S), Linux)
+    LIBS += -lX11 -lXext
+endif
+ifeq ($(UNAME_S), Darwin)  # macOS
+    LIBS += -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+endif
+all: libft mlx $(NAME)
 
-all: $(NAME)
+libft:
+	@echo "$(YELLOW)Compiling Libft$(NC)"
+	@make re -C lib/libft
+	@echo "$(GREEN)Libft compiled$(NC)"
 
-# bonus: $(NAME)
+mlx:
+	@if [ ! -d "lib/MLX42" ]; then \
+		git clone https://github.com/codam-coding-college/MLX42.git lib/MLX42; \
+	fi
+	@cmake -B lib/MLX42/build lib/MLX42 
+	@cmake --build lib/MLX42/build -j4
+	@echo "Building MLX42..."
+
+#$(CC) $(FLAGS) -o $(NAME) $(OBJ) lib/MLX42/build/libmlx42.a lib/libft/libft.a -lm -Iinclude -ldl -lglfw -pthread -lm
+
+$(NAME): $(OBJ)
+	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(MLX_DIR)/build/libmlx42.a lib/libft/libft.a $(LIBS) $(INCLUDE)
+%.o: %.c
+	$(CC) -c $(FLAGS) $^ -o $@
 
 clean:
-		@$(RM) $(OBJS) $(OBJ_B)
-
+	rm -f $(OBJ)
 fclean: clean
-		$(RM) $(NAME) $(BONUS_NAME)
-
+	rm -f cub3d
 re: fclean all
-
-
-.PHONY : all clean fclean re bonus
-
-
-# NAME	:= so_long
-# CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
-# LIBMLX	:= ./MLX42
-
-# HEADERS	:= -I ./include -I $(LIBMLX)/include
-# LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-# SRCS	:= main.c src/exit_game.c src/initiation.c src/keypress.c \
-# 			src/output_elmts.c src/playgame.c src/read_map.c \
-# OBJS	:= ${SRCS:.c=.o}
-
-# all: libmlx $(NAME)
-
-# libmlx:
-# 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
-
-# %.o: %.c
-# 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS) && printf "Compiling: $(notdir $<)"
-
-# $(NAME): $(OBJS)
-# 	@make all -C libraries/libft
-# 	@$(CC) $(OBJS) $(LIBS) $(HEADERS) libraries/LIBFT/$(LIBFT) -o $(NAME)
-
-# clean:
-# 	@rm -rf $(OBJS)
-# 	@rm -rf $(LIBMLX)/build
-
-# fclean: clean
-# 	@rm -rf $(NAME)
-
-# re: clean all
-
-# .PHONY: all, clean, fclean, re, libmlx

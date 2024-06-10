@@ -1,37 +1,29 @@
-#include "../includes/structs.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: voszadcs <voszadcs@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/10 05:39:31 by voszadcs          #+#    #+#             */
+/*   Updated: 2024/06/10 05:40:41 by voszadcs         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int main(int argc, char **argv) {
-    t_map *game;
-	// char **input;
-	
-	// game = (t_map *)calloc(1, sizeof(t_map));
-	// if (argc < 2)
-	// 	return (1);
-    game = parse(argc, argv);
-    // input = read_file(argv[1]);
-    // parse_description(game, input);
-    // parse_map(game, input);
-    // find_player_position(game);
-    // printf("map: %s\n", game->map[0]);
-    // printf("direction: %s\n", game.g_map->map[1]);
-    start_the_game(game);
 
-    return (0);
+#include "../include/cub3d.h"
+
+int	main(int argc, char **argv)
+{
+	t_map	*map;
+
+	map = parse(argc, argv);
+	start_the_game(map);
+	return (EXIT_SUCCESS);
 }
 
-// int main(int argc, char **argv) {
-//     if (argc != 2) {
-//         fprintf(stderr, "Usage: %s <map_file>\n", argv[0]);
-//         return 1;
-//     }
-
-//     t_map *map = parse_map1(argv[1]);
-//     if (!map) {
-//         fprintf(stderr, "Failed to parse the map.\n");
-//         return 1;
-//     }
-
-// 	start_the_game(map);
-
-//     return 0;
+// int main(int argc, char **argv)
+// {
+// 	mmain(argc, argv);
+// 	system("leaks a.out");
 // }
