@@ -6,10 +6,9 @@
 /*   By: voszadcs <voszadcs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 05:33:10 by voszadcs          #+#    #+#             */
-/*   Updated: 2024/06/10 05:34:14 by voszadcs         ###   ########.fr       */
+/*   Updated: 2024/06/12 03:00:53 by voszadcs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/cub3d.h"
 
@@ -40,22 +39,47 @@ static int	check_chars(char **map)
 	return (free(pool), flag);
 }
 
+static int	closed_diff_len_walls(char *str1, char *str2)
+{
+	int	len1;
+	int	len2;
+
+	len1 = ft_strlen(str1);
+	len2 = ft_strlen(str2);
+	if (len1 > len2)
+	{
+		while (str1[len2] != '\0')
+		{
+			if (str1[len2] == '0' || str1[len2 - 1] == '0')
+				return (0);
+			len2++;
+		}
+	}
+	else if (len2 > len1)
+	{
+		while (str2[len1] != '\0')
+		{
+			if (str2[len1] == '0' || str2[len1 - 1] == '0')
+				return (0);
+			len1++;
+		}
+	}
+	return (1);
+}
 
 static int	check_walls(char **map)
 {
 	char	*line;
 
 	line = *map;
-	while (*line)
-	{
-		if (*line != '1')
-			return (0);
-		line++;
-	}
+	if (!check_first_line(line))
+		return (0);
 	while (*map)
 	{
 		line = *map;
-		if (line[0] != '1' || line[ft_strlen(line) - 1] != '1')
+		if (*(map + 1) != NULL && (line[0] != '1'
+				|| line[ft_strlen(line) - 1] != '1'
+				|| !closed_diff_len_walls(*map, *(map + 1))))
 			return (0);
 		if (*(map + 1) == NULL)
 		{

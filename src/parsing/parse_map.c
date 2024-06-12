@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: voszadcs <voszadcs@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 05:30:11 by voszadcs          #+#    #+#             */
-/*   Updated: 2024/06/10 05:32:32 by voszadcs         ###   ########.fr       */
+/*   Updated: 2024/06/12 21:21:39 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/cub3d.h"
 
@@ -45,7 +44,7 @@ static void	copy_map(char **map, char **input)
 	free(pool);
 	while (*input)
 	{
-		if (input + 1 != NULL)
+		if (*(input + 1) != NULL)
 			*map = ft_substr(*input, 0, ft_strlen(*input) - 1);
 		else
 			*map = ft_strdup(*input);
@@ -84,11 +83,12 @@ static void	find_player_position(t_map *data)
 	int	y;
 
 	y = 0;
-	while (++y < data->map_h)
+	while (y < data->map_h)
 	{
 		x = 0;
-		while (++x < data->map_w)
+		while (x < data->map_w)
 		{
+			// printf("%s\n", data->map2d[x]);
 			if (data->map2d[y][x] == 'N' || data->map2d[y][x] == 'S' ||
 				data->map2d[y][x] == 'E' || data->map2d[y][x] == 'W')
 			{
@@ -97,7 +97,9 @@ static void	find_player_position(t_map *data)
 				data->map2d[y][x] = '0';
 				return ;
 			}
+			x++;
 		}
+		y++;
 	}
 	data->player_x = -1;
 	data->player_y = -1;
@@ -118,15 +120,18 @@ void	parse_map(t_map *map, char **input)
 	map2d = malloc(sizeof(char *) * (i + 1));
 	map2d[i] = NULL;
 	copy_map(map2d, input);
+	printf("input:\n %s\n", input[i]);
 	map->map2d = map2d;
 	map->map_h = i;
 	map->map_w = map_width(map2d);
-	printf("MAP POS: %d %d\n", map->map_h, map->map_w);
+	printf("map2d:\n %s\n", map->map2d[i]);
 	free_double_char(input);
 	if (!valid_map(map2d))
 	{
 		free_map_struct(map);
 		error(INVALID_MAP);
 	}
+	printf("height: %d\n", map->map_h);
+	printf("weight: %d\n", map->map_w);
 	find_player_position(map);
 }

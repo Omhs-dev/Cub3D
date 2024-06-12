@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:33:18 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/10 08:18:26 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:15:28 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,6 @@ int	check_u_circle(float angle, char c)
 			return (1);
 	}
 	return (0);
-}
-
-void	ft_put_pixel(t_game *game, int x, int y, int c)
-{
-	if ((x >= 0 && x < S_W) && (y >= 0 && y < S_H))
-		mlx_put_pixel(game->img, x, y, c);
 }
 
 uint32_t	rgb_color(int r, int g, int b, int a)

@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 10:06:16 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/10 10:08:20 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:21:21 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	check_inter(float angle, float *inter, float *step, int horiz)
 	}
 	return (1);
 }
-
 
 float	hor_inter(t_game *game, float angl)
 {

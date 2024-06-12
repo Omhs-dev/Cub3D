@@ -5,14 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/10 07:37:54 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/11 10:22:30 by ohamadou         ###   ########.fr       */
+/*   Created: 2024/06/12 03:42:36 by voszadcs          #+#    #+#             */
+/*   Updated: 2024/06/12 19:06:55 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# define PLAYER_WID 64
+# define PLAYER_HEI 64
 // ERROR CODES
 # define WRONG_ARGS_NUM 1
 # define NAME_LENGTH 2
@@ -22,26 +24,26 @@
 # define INVALID_MAP 6
 # define LOAD_TEXTURES 7
 // misc
-# define S_W 1900
-# define S_H 1000
-# define TILE_SIZE 16
-# define FOV 60
-# define ROTATION_SPEED 0.045
-# define PLAYER_SPEED 3
+# define S_W 1900 // screen width
+# define S_H 1000 // screen height
+# define TILE_SIZE 16 // tile size
+# define FOV 60 // field of view
+# define ROTATION_SPEED 0.045 // rotation speed
+# define PLAYER_SPEED 4	// player speed
 # define M_PI 3.14159265358979323846
 //color
 # define RED 0
 # define GREEN 1
 # define BLUE 2
-//includes
+//Includes
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
 # include <fcntl.h>
 # include <errno.h>
 # include <math.h>
-# include "../lib/libft/libft.h"
 # include "../lib/MLX42/include/MLX42/MLX42.h"
+# include "../lib/libft/libft.h"
 # include "../src/get_next_line/get_next_line.h"
 
 typedef struct s_map
@@ -53,22 +55,21 @@ typedef struct s_map
 	int		*floor;
 	int		*ceiling;
 	char	**map2d;
-    int		map_w;
-    int		map_h;
-    int		player_x;
-    int		player_y;
+	int		map_w;
+	int		map_h;
+	int		player_x;
+	int		player_y;
 }	t_map;
 
-typedef struct s_player
-{
-    int		player_x;
-    int		player_y;
-    int		direc_x;
-    int		direc_y;
-    int		rotation;
-    float	fov;
-    double	p_angle;
-    double	p_speed;
+typedef struct s_player {
+	int			player_x;
+	int			player_y;
+	int			direc_x;
+	int			direc_y;
+	int			rotation;
+	double		p_angle;
+	double		p_speed;
+	float		fov;
 }	t_player;
 
 typedef struct s_texture
@@ -81,16 +82,16 @@ typedef struct s_texture
 
 typedef struct s_ray
 {
-	int			ray_i;
-	double		hor_x;
-	double		hor_y;
-	double		ray_ngl;
-	double		distance;
-	int			flag;
-	int			hit_x;
-    int			hit_y;
-    int			is_vertical;
-    t_texture	*hit_tex;
+	int				ray_i;
+	double			hor_x;
+	double			hor_y;
+	double			ray_ngl;
+	double			distance;
+	int				flag;
+	int				hit_x;
+	int				hit_y;
+	int				is_vertical;
+	t_texture		*hit_tex;
 }	t_ray;
 
 typedef struct s_game
@@ -104,32 +105,34 @@ typedef struct s_game
 }	t_game;
 
 //parsing
-char	    *get_next_line(int fd);
+char		*get_next_line(int fd);
 t_map		*parse(int argc, char **argv);
-void        parse_description(t_map *map, char **input);
-int         validate_descr(char **input);
-int         is_rgb_value(char *str);
-void        parse_map(t_map *map, char **input);
-int         valid_map(char **map);
+void		parse_description(t_map *map, char **input);
+int			validate_descr(char **input);
+int			is_rgb_value(char **str);
+void		parse_map(t_map *map, char **input);
+int			valid_map(char **map);
+int			check_first_line(char *line);
+
 //general utils
 int			error(int errnum);
-void        free_double_char(char **array);
-void        free_map_struct(t_map *map);
-void        free_game_struct(t_game *game);
-void        free_text_struct(t_texture *text);
+void		free_double_char(char **array);
+void		free_map_struct(t_map *map);
+void		free_game_struct(t_game *game);
+void		free_text_struct(t_texture *text);
 //game
-void        start_the_game(t_map *map);
-void 		mlx_key(mlx_key_data_t key_game, void *param);
-void 		move_hook(t_game *game, double move_x, double move_y);
+void		start_the_game(t_map *map);
+void		mlx_key(mlx_key_data_t key_game, void *param);
+void		move_hook(t_game *game, double move_x, double move_y);
 void		render_wall(t_game *mlx, int ray);
 void		ray_casting(t_game *game);
 float		nor_angle(float angle);
-float	hor_inter(t_game *game, float angl);
-float	vert_inter(t_game *game, float angl);
-int	check_u_circle(float angle, char c);
-void 		ft_put_pixel(t_game *game, int x, int y, int c);
-uint32_t 	rgb_color(int r, int g, int b, int a);
-unsigned int get_color(int c);
+float		hor_inter(t_game *game, float angl);
+float		vert_inter(t_game *game, float angl);
+int			check_u_circle(float angle, char c);
+void		ft_put_pixel(t_game *game, int x, int y, int c);
+uint32_t	rgb_color(int r, int g, int b, int a);
+unsigned	int	get_color(int c);
 double		get_x_offset(mlx_texture_t *texture, t_game *data);
 
 #endif

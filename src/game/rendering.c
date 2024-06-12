@@ -6,11 +6,17 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 16:33:44 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/10 08:10:37 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:15:50 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+void	ft_put_pixel(t_game *game, int x, int y, int c)
+{
+	if ((x >= 0 && x < S_W) && (y >= 0 && y < S_H))
+		mlx_put_pixel(game->img, x, y, c);
+}
 
 mlx_texture_t	*wall_texture(t_game *game, int flag)
 {

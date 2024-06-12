@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 16:23:46 by ohamadou          #+#    #+#             */
-/*   Updated: 2023/03/31 01:04:15 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:17:09 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #  define BUFFER_SIZE 1000
 # endif
 
-int	    foo_strlen(char *str);
+int		foo_strlen(char *str);
 char	*foo_strchr(char *s, int c);
 char	*get_the_line(char *strng);
 void	*foo_memcpy(void *dest, const void *src, size_t n);

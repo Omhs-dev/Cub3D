@@ -6,15 +6,15 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 08:52:16 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/10 08:52:19 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/12 04:40:10 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static void key_press(mlx_key_data_t key_game, void *param)
+void	key_press(mlx_key_data_t key_game, void *param)
 {
-	t_game *game;
+	t_game	*game;
 
 	game = (t_game *)param;
 	if (key_game.key == MLX_KEY_ESCAPE && (key_game.action == MLX_PRESS))
@@ -33,7 +33,7 @@ static void key_press(mlx_key_data_t key_game, void *param)
 		game->ply->rotation = -1;
 }
 
-static void key_release(mlx_key_data_t key_game, t_game *game)
+void	key_release(mlx_key_data_t key_game, t_game *game)
 {
 	if (key_game.key == MLX_KEY_D && key_game.action == MLX_RELEASE)
 		game->ply->direc_x = 0;
@@ -49,7 +49,7 @@ static void key_release(mlx_key_data_t key_game, t_game *game)
 		game->ply->rotation = 0;
 }
 
-void mlx_key(mlx_key_data_t key_game, void *param)
+void	mlx_key(mlx_key_data_t key_game, void *param)
 {
 	t_game	*game;
 
