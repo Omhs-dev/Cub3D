@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: voszadcs <voszadcs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 05:30:11 by voszadcs          #+#    #+#             */
-/*   Updated: 2024/06/12 21:21:39 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/13 01:19:04 by voszadcs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,32 +77,31 @@ int	map_width(char **map)
 	return (prev);
 }
 
-static void	find_player_position(t_map *data)
+static void	find_player_position(t_map *map)
 {
-	int	x;
-	int	y;
+	char	*line;
+	char	**mapp;
 
-	y = 0;
-	while (y < data->map_h)
+	mapp = map->map2d;
+	map->player_x = -1;
+	map->player_y = -1;
+	while (*mapp)
 	{
-		x = 0;
-		while (x < data->map_w)
+		line = *mapp;
+		++map->player_y;
+		while (*line)
 		{
-			// printf("%s\n", data->map2d[x]);
-			if (data->map2d[y][x] == 'N' || data->map2d[y][x] == 'S' ||
-				data->map2d[y][x] == 'E' || data->map2d[y][x] == 'W')
+			++map->player_x;
+			if (*line == 'N' || *line == 'S' || *line == 'W' || *line == 'E')
 			{
-				data->player_x = x;
-				data->player_y = y;
-				data->map2d[y][x] = '0';
+				printf("x: %d y: %d\n", map->player_x, map->player_y);
 				return ;
 			}
-			x++;
+			line++;
 		}
-		y++;
+		map->player_x = -1;
+		mapp++;
 	}
-	data->player_x = -1;
-	data->player_y = -1;
 }
 
 void	parse_map(t_map *map, char **input)
@@ -120,18 +119,14 @@ void	parse_map(t_map *map, char **input)
 	map2d = malloc(sizeof(char *) * (i + 1));
 	map2d[i] = NULL;
 	copy_map(map2d, input);
-	printf("input:\n %s\n", input[i]);
 	map->map2d = map2d;
 	map->map_h = i;
 	map->map_w = map_width(map2d);
-	printf("map2d:\n %s\n", map->map2d[i]);
 	free_double_char(input);
 	if (!valid_map(map2d))
 	{
 		free_map_struct(map);
 		error(INVALID_MAP);
 	}
-	printf("height: %d\n", map->map_h);
-	printf("weight: %d\n", map->map_w);
 	find_player_position(map);
 }

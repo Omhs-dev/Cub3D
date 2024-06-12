@@ -34,7 +34,7 @@ SRC:= 	./src/main.c \
 OBJ:=	$(SRC:.c=.o)
 
 FLAGS:=	-Wall -Werror -Wextra
-# FLAGS+= -g3 -fsanitize=address
+FLAGS+= -g3 -fsanitize=address
 
 CC:= gcc
 
@@ -57,17 +57,17 @@ all: libft mlx $(NAME)
 libft:
 	@echo "$(YELLOW)Compiling Libft$(NC)"
 	@make re -C lib/libft
+	@make clean -C lib/libft
 	@echo "$(GREEN)Libft compiled$(NC)"
 
 mlx:
-	@if [ ! -d "lib/MLX42" ]; then \
-		git clone https://github.com/codam-coding-college/MLX42.git lib/MLX42; \
+	@if [ ! -d "lib/MLX42" ] || [ -z "$(ls -A lib/MLX42)" ]; then \
+		rm -rf lib/MLX42; \
 	fi
+	@git clone https://github.com/codam-coding-college/MLX42.git lib/MLX42; 
 	@cmake -B lib/MLX42/build lib/MLX42 
 	@cmake --build lib/MLX42/build -j4
 	@echo "Building MLX42..."
-
-#$(CC) $(FLAGS) -o $(NAME) $(OBJ) lib/MLX42/build/libmlx42.a lib/libft/libft.a -lm -Iinclude -ldl -lglfw -pthread -lm
 
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(MLX_DIR)/build/libmlx42.a lib/libft/libft.a $(LIBS) $(INCLUDE)
