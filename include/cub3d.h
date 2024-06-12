@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 07:37:54 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/10 10:11:42 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/11 10:22:30 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define TILE_SIZE 16
 # define FOV 60
 # define ROTATION_SPEED 0.045
-# define PLAYER_SPEED 1
+# define PLAYER_SPEED 3
 # define M_PI 3.14159265358979323846
 //color
 # define RED 0

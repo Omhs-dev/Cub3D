@@ -6,7 +6,7 @@
 /*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 07:29:14 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/10 10:15:59 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/11 09:47:38 by ohamadou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	ray_casting(t_game *game)
 	{
 		process_ray(game, ray);
 		ray++;
-		game->ray->ray_ngl += (game->ply->fov / S_W);
+		game->ray->ray_ngl += (game->ply->fov / (S_W));
 	}
 }
