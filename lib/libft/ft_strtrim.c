@@ -6,14 +6,14 @@
 /*   By: voszadcs <voszadcs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 02:10:36 by voszadcs          #+#    #+#             */
-/*   Updated: 2022/11/15 05:25:53 by voszadcs         ###   ########.fr       */
+/*   Updated: 2024/06/13 02:16:09 by voszadcs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 static int	ft_front(char *src, char *trim)
-{	
+{
 	int	i;
 	int	k;
 	int	count;

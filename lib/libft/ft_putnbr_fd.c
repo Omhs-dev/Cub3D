@@ -6,14 +6,14 @@
 /*   By: voszadcs <voszadcs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:45:25 by voszadcs          #+#    #+#             */
-/*   Updated: 2022/11/13 19:36:07 by voszadcs         ###   ########.fr       */
+/*   Updated: 2024/06/13 02:16:21 by voszadcs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 void	ft_putnbr_fd(int n, int fd)
-{	
+{
 	if (n < 0)
 	{
 		write(fd, "-", 1);

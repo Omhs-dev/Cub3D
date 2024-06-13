@@ -6,7 +6,7 @@
 /*   By: voszadcs <voszadcs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 05:30:11 by voszadcs          #+#    #+#             */
-/*   Updated: 2024/06/13 01:19:04 by voszadcs         ###   ########.fr       */
+/*   Updated: 2024/06/13 05:14:45 by voszadcs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,10 @@ void	parse_map(t_map *map, char **input)
 	map2d = malloc(sizeof(char *) * (i + 1));
 	map2d[i] = NULL;
 	copy_map(map2d, input);
+	free_double_char(input);
 	map->map2d = map2d;
 	map->map_h = i;
 	map->map_w = map_width(map2d);
-	free_double_char(input);
 	if (!valid_map(map2d))
 	{
 		free_map_struct(map);

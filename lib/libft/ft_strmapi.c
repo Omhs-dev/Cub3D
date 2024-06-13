@@ -6,14 +6,14 @@
 /*   By: voszadcs <voszadcs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 16:08:26 by voszadcs          #+#    #+#             */
-/*   Updated: 2022/11/02 16:36:48 by voszadcs         ###   ########.fr       */
+/*   Updated: 2024/06/13 02:15:53 by voszadcs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
-{	
+{
 	int		i;
 	char	*buffer;
 

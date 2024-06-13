@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohamadou <ohamadou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: voszadcs <voszadcs@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 04:27:18 by ohamadou          #+#    #+#             */
-/*   Updated: 2024/06/12 20:34:55 by ohamadou         ###   ########.fr       */
+/*   Updated: 2024/06/13 03:48:35 by voszadcs         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,5 @@ void	start_the_game(t_map *dt)
 	mlx_loop_hook(game.mlx, &game_loop, &game);
 	mlx_key_hook(game.mlx, &mlx_key, &game);
 	mlx_loop(game.mlx);
-	mlx_close_window(game.mlx);
+	free_game_struct(&game);
 }

@@ -15,7 +15,7 @@ OBJ:=	$(SRC:.c=.o)
 
 BOBJ:=	$(BSRC:.c=.o)
 
-FLAGS:=	-Wall -Werror -Wextra
+FLAGS:=	-Wall -Werror -Wextra -g
 
 CC:= gcc
 
